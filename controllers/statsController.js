@@ -39,8 +39,18 @@ class StatsController {
         playersList.push(player);
       }
 
-      return res.json(playersList);
+      const tournamentNameNode = dom.window.document.querySelectorAll(
+        "div[class^='_tid__tournament__top-left-title__']",
+      );
+
+      return res.json({
+        tournamentInfo: {
+          title: tournamentNameNode[0].textContent,
+        },
+        playersList,
+      });
     } catch (e) {
+      console.error(e.message);
       next(ApiError.badRequest(e.message));
     }
   }
@@ -53,11 +63,20 @@ class StatsController {
       const toursNode = dom.window.document.querySelectorAll(
         "div[class^='_tid__tournament__games__']",
       );
-
       const toursList = tourStats.getToursList(toursNode);
 
-      return res.json(toursList);
+      const tournamentNameNode = dom.window.document.querySelectorAll(
+        "div[class^='_tid__tournament__top-left-title__']",
+      );
+
+      return res.json({
+        tournamentInfo: {
+          title: tournamentNameNode[0].textContent,
+        },
+        toursList,
+      });
     } catch (e) {
+      console.error(e.message);
       next(ApiError.badRequest(e.message));
     }
   }

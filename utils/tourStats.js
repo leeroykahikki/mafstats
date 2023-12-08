@@ -3,7 +3,7 @@ class TourStats {
     const toursList = [];
 
     for (let i = 0; i < toursNode[0].childNodes.length; i++) {
-      toursList.push(getTourInfo(toursNode[0].childNodes[i]));
+      toursList.push(this.getTourInfo(toursNode[0].childNodes[i]));
     }
 
     return toursList;
@@ -81,7 +81,7 @@ class TourStats {
       }
     }
 
-    return extraPoints;
+    return Math.round((extraPoints + Number.EPSILON) * 100) / 100;
   }
 }
 
