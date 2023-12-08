@@ -13,6 +13,11 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'static')));
 app.use('/api', router);
 
+// cron
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
 // Обработка ошибок, последний Middleware
 app.use(errorHandler);
 
